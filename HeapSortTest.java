@@ -4,11 +4,15 @@ public class HeapSortTest {
     public static void main (String[] args) {
         // Sorting 100M integers takes ~44sec on a macbook pro
         int[]a=HeapSortTest.randomArray(100000000,100000000);
+        int[]b=Arrays.copyOf(a, a.length);
         HeapSort s=new HeapSort(a);
-        long start=System.currentTimeMillis();
+        long start1=System.currentTimeMillis();
         s.sort();
-        long time=System.currentTimeMillis()-start;
-        System.out.printf("time: %dms\nsorted:%b\n",time,isSorted(a));
+        long time1=System.currentTimeMillis()-start1;
+        long start2=System.currentTimeMillis();
+        Arrays.sort(b);
+        long time2=System.currentTimeMillis()-start2;
+        System.out.printf("avivsort: %dms\njavasort:%dms\n",time1,time2);
 
     }
 
