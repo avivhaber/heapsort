@@ -1,24 +1,27 @@
 public class HeapSort {
 
-    int[] heap;
-    int len;
+    private int[] heap;
+    private int len;
 
     HeapSort (int[] heap) {
         this.heap=heap;
         len=heap.length;
     }
 
+    /**
+     * This is an in-place sort and will modify the original array passed in the constructor.
+     */
     void sort () {
         int n=len;
         heapify();
 
         for (int i=0;i<n;i++) {
             int temp=extract();
-            heap[len]=temp;
+            heap[len]=temp; // Since the heap shrinks by 1 each iteration, we can put each extracted element at the end of the effective heap
         }
     }
 
-    int extract () {
+    private int extract () {
         int top = heap[0];
         heap[0]=heap[len-1];
         len--;
@@ -26,6 +29,9 @@ public class HeapSort {
         return top;
     }
 
+    /**
+     * Uses Floyd's method for heap building.
+     */
     private void heapify () {
         for (int i=len-1;i>=0;i--) {
             siftDown(i);
